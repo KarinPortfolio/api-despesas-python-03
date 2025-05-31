@@ -41,16 +41,20 @@ Diagrama de Relacionamento de Entidades:
 
 Documentação dos principais endpoints (incluindo método HTTP, URL, parâmetros, e exemplo de resposta).
 
-| Método | URL                                        | Descrição          |
-| ------ | ------------------------------------------ | ------------------ |
-| POST   | http://localhost:5000/usuario              | Cadastra o usuário |
-| GET    | http://localhost:5000/usuario              | Lista usuários     |
-| PUT    | http://localhost:5000/usuario/id           | Atualiza o usuário |
-| DELETE | http://localhost:5000/usuario/id           | Remove o usuário   |
-| POST   | http://localhost:5000/despesa/novadespesa  | Cria nova despesa  |
-| GET    | http://localhost:5000/despesa/listar       | Lista despesas     |
-| PUT    | http://localhost:5000/despesa/atualizar/id | Atualiza a despesa |
-| DELETE | http://localhost:5000/despesa/deletar/id   | Remove a despesa   |
+| Método | URL                                          | Descrição          |
+| ------ | -------------------------------------------- | ------------------ |
+| POST   | http://localhost:5000/usuario                | Cadastra o usuário |
+| GET    | http://localhost:5000/usuario                | Lista usuários     |
+| PUT    | http://localhost:5000/usuario/id             | Atualiza o usuário |
+| DELETE | http://localhost:5000/usuario/id             | Remove o usuário   |
+| POST   | http://localhost:5000/despesa/novadespesa    | Cria nova despesa  |
+| GET    | http://localhost:5000/despesa/listar         | Lista despesas     |
+| PUT    | http://localhost:5000/despesa/atualizar/id   | Atualiza a despesa |
+| DELETE | http://localhost:5000/despesa/deletar/id     | Remove a despesa   |
+| POST   | http://localhost:5000/categoria/nova         | Cria nova despesa  |
+| GET    | http://localhost:5000/categoria/listar       | Lista despesas     |
+| PUT    | http://localhost:5000/categoria/atualizar/id | Atualiza a despesa |
+| DELETE | http://localhost:5000/categoria/deletar/id   | Remove a despesa   |
 
 # 5. Autenticação:
 
@@ -59,7 +63,7 @@ A API utiliza JWT(JSON Web Token) para autenticação de usuários
 1. Após o login, o usuário recebe um token JWT
 
 2. Esse token deve ser enviado no header `Authorization` nas requisições protegidas:\
-`Authorization: Bearer <seu_token>`
+   `Authorization: Bearer <seu_token>`
 
 3. No Postman, clique na aba **Authorization**
 
@@ -70,6 +74,8 @@ A API utiliza JWT(JSON Web Token) para autenticação de usuários
 6. Agora você pode fazer requisições autenticadas
 
 # 6. Validação de Dados:
+
+uso do marshmallow
 
 # 7. Como rodar o projeto:
 
@@ -96,3 +102,9 @@ ou `set FLASK_APP=app.py`
 http://127.0.0.1:5000/usuario
 
 # 8. Testes:
+
+Fora das pastas, execute o comando:
+`pytest`
+
+Resultado esperado:
+==================================== 4 passed, 8 warnings in 0.87s ====================================
