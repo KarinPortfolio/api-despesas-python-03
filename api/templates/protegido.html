@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Área Protegida</title>
+     <style>
+      body {
+        font-family: sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        flex-direction: column; /* Para alinhar o conteúdo verticalmente */
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        text-align: center; /* Centraliza o texto */
+      }
+
+      .success-container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 350px;
+        max-width: 90%; /* Responsividade para telas menores */
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      p {
+        color: #555;
+        margin-bottom: 15px;
+      }
+
+      a {
+        color: rgb(218, 156, 231);
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .token-display {
+        background-color: #e9e9e9;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 20px;
+        word-break: break-all; /* Quebra o texto para evitar overflow */
+      }
+    </style>
+ </head>
+  <body>
+    <h1>Bem-vindo à Área Protegida!</h1>
+    <div id="protectedContent">Carregando...</div>
+  </body>
+
+ <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('authToken');
+            const protectedContentDiv = document.getElementById('protectedContent');
+
+            if (token) {
+                fetch('/api/protegido', { // Uma nova rota protegida na sua API
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Não autorizado');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    protectedContentDiv.textContent = JSON.stringify(data);
+                })
+                .catch(error => {
+                    protectedContentDiv.textContent = 'Erro ao carregar conteúdo protegido: ' + error.message;
+                });
+            } else {
+                protectedContentDiv.textContent = 'Token não encontrado. Você precisa fazer login.';
+                window.location.href = '/'; // Redirecionar para a página de login
+            }
+        });
+    </script>
+</body>
+</html>

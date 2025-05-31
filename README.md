@@ -16,6 +16,8 @@ Este projeto de gerenciamento de gastos tem como objetivo ser uma ferramenta per
 - **Python**
 - **PostgreSQL**
 - **Flask**
+- **SQLAchemy**
+- **Flask-JWT-Extended (JWT)**
 
 ## Objetivo da API:
 
@@ -39,14 +41,33 @@ Diagrama de Relacionamento de Entidades:
 
 Documentação dos principais endpoints (incluindo método HTTP, URL, parâmetros, e exemplo de resposta).
 
-| Método | URL                              | Descrição          |
-| ------ | -------------------------------- | ------------------ |
-| POST   | http://localhost:5000/usuario    | Cadastra o usuário |
-| GET    | http://localhost:5000/usuario    | Lista usuários     |
-| PUT    | http://localhost:5000/usuario/id | Atualiza o usuário |
-| DELETE | http://localhost:5000/usuario/id | Remove o usuário   |
+| Método | URL                                        | Descrição          |
+| ------ | ------------------------------------------ | ------------------ |
+| POST   | http://localhost:5000/usuario              | Cadastra o usuário |
+| GET    | http://localhost:5000/usuario              | Lista usuários     |
+| PUT    | http://localhost:5000/usuario/id           | Atualiza o usuário |
+| DELETE | http://localhost:5000/usuario/id           | Remove o usuário   |
+| POST   | http://localhost:5000/despesa/novadespesa  | Cria nova despesa  |
+| GET    | http://localhost:5000/despesa/listar       | Lista despesas     |
+| PUT    | http://localhost:5000/despesa/atualizar/id | Atualiza a despesa |
+| DELETE | http://localhost:5000/despesa/deletar/id   | Remove a despesa   |
 
 # 5. Autenticação:
+
+A API utiliza JWT(JSON Web Token) para autenticação de usuários
+
+1. Após o login, o usuário recebe um token JWT
+
+2. Esse token deve ser enviado no header `Authorization` nas requisições protegidas:\
+`Authorization: Bearer <seu_token>`
+
+3. No Postman, clique na aba **Authorization**
+
+4. Em **Type**, selecione **Bearer Token**
+
+5. Cole o token JWT no campo
+
+6. Agora você pode fazer requisições autenticadas
 
 # 6. Validação de Dados:
 
