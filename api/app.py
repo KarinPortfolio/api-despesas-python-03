@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 from extensions import db, jwt
-from flask import Flask
+from flask import Flask, render_template
 from dotenv import load_dotenv
 from blueprints.usuario.usuario import usuario_bp
 from blueprints.despesa.despesa import despesa_bp
@@ -12,6 +12,11 @@ from flask_cors import CORS  # Import Flask-CORS
 load_dotenv()
 
 app = Flask(__name__)  # Crie a instância do Flask no nível do módulo
+
+@app.route('/')
+def index():
+    return render_template('index.html')  # Renderiza o arquivo index.html da pasta templates
+
 
 def create_app(testing=False):
     global app  # Use a variável app global
