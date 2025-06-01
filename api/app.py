@@ -23,16 +23,17 @@ def create_app(testing=False):
         
     else:
         # Banco real para produção/desenvolvimento
-        app.config['SQLALCHEMY_DATABASE_URI'] = (
-            f"postgresql://{DATABASE_CONFIG['user']}:"
-            f"{DATABASE_CONFIG['password']}@"
-            f"{DATABASE_CONFIG['host']}:"
-            f"{DATABASE_CONFIG['port']}/"
-            f"{DATABASE_CONFIG['database']}"
+         app.config['SQLALCHEMY_DATABASE_URI'] = (
+            f"postgresql://{os.environ.get('DATABASE_USER')}:"
+            f"{os.environ.get('DATABASE_PASSWORD')}@"
+            f"{os.environ.get('DATABASE_HOST')}:"
+            f"{os.environ.get('DATABASE_PORT')}/"
+            f"{os.environ.get('DATABASE_DATABASE')}"
         )
         app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'super-secret')
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
     db.init_app(app)
     jwt.init_app(app)
