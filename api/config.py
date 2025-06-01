@@ -5,5 +5,5 @@ load_dotenv()
 
 class Config():
     
-    SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_CONFIG')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
