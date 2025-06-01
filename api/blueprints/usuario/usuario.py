@@ -3,6 +3,7 @@ from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identi
 from passlib.hash import bcrypt
 from extensions import db
 from models import Usuario, Despesa, Categoria
+from flask_cors import cross_origin
 import logging
 
 usuario_bp = Blueprint('usuario', __name__)
@@ -11,7 +12,9 @@ usuario_bp = Blueprint('usuario', __name__)
 logging.basicConfig(level=logging.INFO)
 
 # Login
+
 @usuario_bp.route('/', methods=['GET', 'POST'])
+@cross_origin()
 def login():
     if request.method == 'GET':
         # Renderiza o formulário de login
