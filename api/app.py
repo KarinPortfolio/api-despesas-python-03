@@ -4,7 +4,6 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 from extensions import db, jwt
 from flask import Flask
 from dotenv import load_dotenv
-from config import DATABASE_CONFIG
 from blueprints.usuario.usuario import usuario_bp
 from blueprints.despesa.despesa import despesa_bp
 from blueprints.categoria.categoria import categoria_bp
@@ -20,20 +19,18 @@ def create_app(testing=False):
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
         app.config['TESTING'] = True
         app.config['JWT_SECRET_KEY'] = 'test-secret'
-        
     else:
         # Banco real para produção/desenvolvimento
-         app.config['SQLALCHEMY_DATABASE_URI'] = (
+        app.config['SQLALCHEMY_DATABASE_URI'] = (
             f"postgresql://{os.environ.get('DATABASE_USER')}:"
             f"{os.environ.get('DATABASE_PASSWORD')}@"
             f"{os.environ.get('DATABASE_HOST')}:"
             f"{os.environ.get('DATABASE_PORT')}/"
             f"{os.environ.get('DATABASE_DATABASE')}"
         )
-        app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'super-secret')
+        app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'super-secret') 
 
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
     jwt.init_app(app)
