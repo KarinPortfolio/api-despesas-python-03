@@ -11,8 +11,10 @@ from flask_cors import CORS  # Import Flask-CORS
 
 load_dotenv()
 
+app = Flask(__name__)  # Crie a instância do Flask no nível do módulo
+
 def create_app(testing=False):
-    app = Flask(__name__)
+    global app  # Use a variável app global
 
     if testing:
         # Banco em memória para testes
@@ -28,9 +30,9 @@ def create_app(testing=False):
             f"{os.environ.get('DATABASE_PORT')}/"
             f"{os.environ.get('DATABASE_DATABASE')}"
         )
-        app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'super-secret') 
+        app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'super-secret')
 
-        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
     jwt.init_app(app)
@@ -42,5 +44,5 @@ def create_app(testing=False):
     return app
 
 if __name__ == '__main__':
-    app = create_app()
+    create_app()
     app.run(debug=True)
