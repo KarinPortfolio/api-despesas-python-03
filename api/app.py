@@ -41,7 +41,7 @@ def create_app(testing=False):
 
     db.init_app(app)
     jwt.init_app(app)
-    CORS(app, resources={r"/*": {"origins": "*"}}) 
+    CORS(app, resources={r"/*": {"origins": "https://api-despesas-python-03.onrender.com"}})
     app.register_blueprint(despesa_bp, url_prefix='/despesa')
     app.register_blueprint(usuario_bp)
     app.register_blueprint(categoria_bp, url_prefix='/categoria')
